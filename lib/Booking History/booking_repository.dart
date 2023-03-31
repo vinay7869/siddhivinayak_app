@@ -13,10 +13,9 @@ class BookingRepository {
 
   BookingRepository({required this.firebaseFirestore});
 
-  void saveBookingHistory(
-      BuildContext context, DateTime selectedDate) async {
+  void saveBookingHistory(BuildContext context, DateTime selectedDate) async {
     try {
-       var uid = 'user1';
+      var uid = 'user1';
       var user = DateModel(dateTime: selectedDate);
 
       await firebaseFirestore

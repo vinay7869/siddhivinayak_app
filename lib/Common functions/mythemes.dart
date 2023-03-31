@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 
 class ThemeProvider extends ChangeNotifier {
   var changeMode = ThemeMode.dark;
-  bool get isDarkMode => changeMode == ThemeMode.dark; 
-
-  // get themeMode => changeMode;
+  bool get isDarkMode => changeMode == ThemeMode.dark;
 
   void changeTheme(bool isOn) {
     changeMode = isOn ? ThemeMode.dark : ThemeMode.light;
@@ -18,14 +16,13 @@ class MyThemes {
     colorScheme: const ColorScheme.dark(),
     primaryColor: Colors.white10,
     iconTheme: const IconThemeData(color: Colors.green),
-    
   );
 
   static var lightTheme = ThemeData(
-      scaffoldBackgroundColor: Colors.white,
-      colorScheme: const ColorScheme.light(),
-      appBarTheme: const AppBarTheme(color: Colors.white),
-      iconTheme: const IconThemeData(color: Colors.green),
-      primaryColor: Colors.black26,
-      );
+    scaffoldBackgroundColor: Colors.white,
+    colorScheme: const ColorScheme.light(),
+    appBarTheme: const AppBarTheme(color: Colors.white),
+    iconTheme: const IconThemeData(color: Colors.green),
+    primaryColor: Colors.black26,
+  );
 }

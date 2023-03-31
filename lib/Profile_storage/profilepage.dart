@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:siddhivinayak_app/Profile_storage/image_picker.dart';
 import 'package:siddhivinayak_app/Profile_storage/profile_controller.dart';
 import 'package:siddhivinayak_app/Profile_storage/user_model.dart';
+import '../Pages/my_homepage.dart';
 
 class MyProfile extends ConsumerStatefulWidget {
   static const String routename = 'myprofile';
@@ -16,6 +17,7 @@ class MyProfile extends ConsumerStatefulWidget {
 
 class _MyProfileState extends ConsumerState<MyProfile> {
   File? image;
+
   final nameController = TextEditingController();
 
   final emailController = TextEditingController();
@@ -50,8 +52,9 @@ class _MyProfileState extends ConsumerState<MyProfile> {
   void getProfileData() async {
 //data fetch
     var userData = await FirebaseFirestore.instance.collection('users').get();
+
     UserModel user;
-    // FirebaseStorage profilepic;
+
     user = UserModel.fromMap(userData.docs[0].data());
 
     nameController.text = user.name;
@@ -164,7 +167,10 @@ class _MyProfileState extends ConsumerState<MyProfile> {
               padding:
                   const EdgeInsets.symmetric(horizontal: 100, vertical: 10),
               child: MaterialButton(
-                  onPressed: saveDataToFirebase,
+                  onPressed: () {
+                    saveDataToFirebase();
+                    Navigator.pushNamed(context, MyHomePage.routename);
+                  },
                   color: Colors.red,
                   height: 40,
                   minWidth: 5,

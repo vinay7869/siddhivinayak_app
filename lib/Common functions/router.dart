@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:siddhivinayak_app/Profile_storage/profilepage.dart';
-import 'Pages/my_homepage.dart';
+import '../Pages/my_homepage.dart';
 
 Route<dynamic> routers(RouteSettings settings) {
   switch (settings.name) {

@@ -1,7 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:siddhivinayak_app/Pages/settings.dart';
 import 'package:siddhivinayak_app/Pages/youtube.dart';
+import 'package:siddhivinayak_app/Profile_storage/user_model.dart';
 import '../Booking History/my_bookings.dart';
 import '../Profile_storage/profilepage.dart';
 import 'appointment_booking.dart';
@@ -16,17 +18,39 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  
+  // late String userName;
+  // late String email;
+  // late String profilePic;
+  late FirebaseFirestore firebaseFirestore;
+
+  @override
+  void initState() {
+    super.initState();
+    firebaseFirestore = FirebaseFirestore.instance;
+  }
+
+  // Future<UserModel?> getImages() async {
+  //   var uid = 'user1';
+  //   var userData =
+  //       await FirebaseFirestore.instance.collection('users').doc(uid).get();
+  //   UserModel? user;
+
+  //   if (userData.data() != null) {
+  //     user = UserModel.fromMap(userData.data()!);
+  //   }
+
+  //   userName = user!.name;
+  //   email = user.emailAddress;
+  //   profilePic = user.profilepic;
+
+  //   return user;
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Home", style: TextStyle(color: Colors.redAccent)),
-        leading: IconButton(
-          icon: const Icon(Icons.menu),
-          onPressed: () {},
-          color: Colors.red,
-        ),
         actions: [
           IconButton(
             onPressed: () {
@@ -35,7 +59,6 @@ class _MyHomePageState extends State<MyHomePage> {
             },
             icon: const Icon(
               Icons.notifications,
-              color: Colors.red,
             ),
           ),
           IconButton(
@@ -43,17 +66,50 @@ class _MyHomePageState extends State<MyHomePage> {
               SystemNavigator.pop();
             },
             icon: const Icon(Icons.power_settings_new),
-            color: Colors.redAccent,
           ),
         ],
+        iconTheme: const IconThemeData(color: Colors.red),
       ),
+      drawer: Drawer(
+          child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+              stream: firebaseFirestore.collection('users').snapshots(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+                return ListView.builder(
+                  itemCount: snapshot.data!.docs.length,
+                  itemBuilder: (context, index) {
+                    var userData = snapshot.data!.docs[index].data();
+                    var user = UserModel.fromMap(userData);
+                    return Column(children: [
+                      UserAccountsDrawerHeader(
+                        accountName: Text(user.name),
+                        accountEmail: Text(user.emailAddress),
+                        currentAccountPicture: CircleAvatar(
+                          backgroundImage: NetworkImage(user.profilepic),
+                        )
+                      ),
+                      ListTile(
+                        title: Text('Hello  ${user.name}'),
+                      )
+                    ]);
+                  },
+                );
+              })),
       body: ListView(
         children: <Widget>[
-          const Image(
-            image: AssetImage(
-              'assets/DSLR.jpg',
+          const SizedBox(
+            height: 370,
+            width: 100,
+            child: Image(
+              image: AssetImage(
+                'assets/DSLR.jpg',
+              ),
+              fit: BoxFit.cover,
             ),
-            fit: BoxFit.cover,
           ),
           const SizedBox(height: 20),
           Container(
@@ -150,7 +206,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     borderRadius: BorderRadius.circular(17)),
                 onTap: () {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (_) => const Settings()));
+                      MaterialPageRoute(builder: (_) => const MySettings()));
                 }),
           ),
         ],

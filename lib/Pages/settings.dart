@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:siddhivinayak_app/mythemes.dart';
+import 'package:siddhivinayak_app/Common%20functions/mythemes.dart';
 import 'package:provider/provider.dart';
 
-class Settings extends StatefulWidget {
-  const Settings({Key? key}) : super(key: key);
+class MySettings extends StatefulWidget {
+  const MySettings({Key? key}) : super(key: key);
 
   @override
-  State<Settings> createState() => _SettingsState();
+  State<MySettings> createState() => _SettingsState();
 }
 
-class _SettingsState extends State<Settings> {
+class _SettingsState extends State<MySettings> {
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart' as prefix;
 import 'package:provider/provider.dart';
-import 'package:siddhivinayak_app/mythemes.dart';
+import 'package:siddhivinayak_app/Common%20functions/mythemes.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:siddhivinayak_app/router.dart';
+import 'package:siddhivinayak_app/Common%20functions/router.dart';
 import 'Pages/my_homepage.dart';
 import 'firebase_options.dart';
 
@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => ThemeProvider(),
-      builder: (context, child) {
+      builder: (context, index) {
         final themeProvider = Provider.of<ThemeProvider>(context);
         return MaterialApp(
           title: "SiddhiVinayak",
