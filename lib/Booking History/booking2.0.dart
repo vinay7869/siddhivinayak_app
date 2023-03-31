@@ -2,19 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:siddhivinayak_app/Booking%20History/booking_controller.dart';
 import 'package:siddhivinayak_app/Pages/appointment_booking.dart';
+import '../Pages/confirmationpage.dart';
 
-class Booking2 extends ConsumerStatefulWidget {
-  const Booking2({
+class AppointmentDateSelection extends ConsumerStatefulWidget {
+  const AppointmentDateSelection({
     Key? key,
   }) : super(key: key);
 
   @override
-  ConsumerState<Booking2> createState() => _Booking2State();
+  ConsumerState<AppointmentDateSelection> createState() =>
+      _AppointmentDateSelectionState();
 }
 
-class _Booking2State extends ConsumerState<Booking2> {
+class _AppointmentDateSelectionState
+    extends ConsumerState<AppointmentDateSelection> {
   DateTime? selectedDateTime;
-  // final String docid = '1234567890';
 
   void pickaDate() {
     showDatePicker(
@@ -80,10 +82,6 @@ class _Booking2State extends ConsumerState<Booking2> {
                   border: Border.all(
                       color: Colors.red, style: BorderStyle.solid, width: 2),
                 ),
-                // ternary operator   cond ? :
-                // value1 ?? value2
-                // child: Text(selectedDateTime !=null ? selectedDateTime.toString() : 'Select a date' ),
-
                 child: Row(
                   children: [
                     Padding(
@@ -141,7 +139,14 @@ class _Booking2State extends ConsumerState<Booking2> {
             ),
             const SizedBox(height: 90),
             GestureDetector(
-              onTap: saveBookingHistory,
+              onTap: () {
+                saveBookingHistory();
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const ConfirmationPage(),
+                    ));
+              },
               child: Container(
                 height: 50,
                 width: 50,

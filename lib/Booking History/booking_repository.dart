@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:siddhivinayak_app/Booking%20History/date_model.dart';
-import 'package:siddhivinayak_app/Pages/confirmationpage.dart';
 import 'package:siddhivinayak_app/Profile_storage/image_picker.dart';
 
 final bookingRepositoryProvider = Provider(
@@ -24,13 +23,6 @@ class BookingRepository {
           .collection('datetime')
           .doc()
           .set(user.toMap());
-
-      // ignore: use_build_context_synchronously
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const ConfirmationPage(),
-          ));
     } catch (e) {
       showSnackbar(context: context, content: e.toString());
     }

@@ -12,7 +12,19 @@ class MyBookings extends StatefulWidget {
 
 class _MyBookingsState extends State<MyBookings> {
   final uid = 'user1';
-  bool showOnline = false;
+  bool isPending = false;
+
+  void openDialougeBox() {
+    showDialog(
+      context: context,
+      builder: (context) => const AlertDialog(
+          backgroundColor: Colors.indigo,
+          title: Text(
+            'Appointment already completed',
+            textAlign: TextAlign.center,
+          )),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,9 +59,9 @@ class _MyBookingsState extends State<MyBookings> {
                   var history = snapshot.data!.docs[index].data();
                   var myHistory = DateModel.fromMap(history);
                   if (myHistory.dateTime.isAfter(currentDate)) {
-                    showOnline = true;
+                    isPending = true;
                   } else {
-                    showOnline = false;
+                    isPending = false;
                   }
                   return Column(
                     children: [
@@ -66,14 +78,31 @@ class _MyBookingsState extends State<MyBookings> {
                                 children: <Widget>[
                                   Text(DateFormat.yMMMMEEEEd()
                                       .format(myHistory.dateTime)),
-                                  Text(DateFormat.jm()
-                                      .format(myHistory.dateTime)),
-                                  showOnline
-                                      ? Icon(Icons.double_arrow_outlined,
-                                          color:
-                                              Theme.of(context).iconTheme.color)
-                                      : const Icon(Icons.double_arrow_outlined,
-                                          color: Colors.red)
+                                  isPending
+                                      ? ElevatedButton(
+                                          onPressed: () {},
+                                          style: ButtonStyle(
+                                              shape: MaterialStatePropertyAll(
+                                                  RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              20))),
+                                              backgroundColor:
+                                                  const MaterialStatePropertyAll(
+                                                      Colors.orange)),
+                                          child: const Text('Tap to Scan'))
+                                      : ElevatedButton(
+                                          onPressed: openDialougeBox,
+                                          style: ButtonStyle(
+                                              shape: MaterialStatePropertyAll(
+                                                  RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              20))),
+                                              backgroundColor:
+                                                  const MaterialStatePropertyAll(
+                                                      Colors.green)),
+                                          child: const Text('Completed'))
                                 ],
                               ))),
                     ],

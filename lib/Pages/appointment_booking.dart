@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:siddhivinayak_app/Pages/booking2.0.dart';
-
+import 'package:siddhivinayak_app/Booking%20History/booking2.0.dart';
 import 'my_homepage.dart';
 
 class AppointmentBooking extends StatefulWidget {
-  
   const AppointmentBooking({Key? key}) : super(key: key);
 
   @override
@@ -20,7 +18,8 @@ class _AppointmentBookingState extends State<AppointmentBooking> {
           leading: IconButton(
             icon: const Icon(Icons.arrow_back, color: Colors.red),
             onPressed: () {
-               Navigator.push(context, MaterialPageRoute(builder: (_) => const MyHomePage()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (_) => const MyHomePage()));
             },
           ),
           title: const Text("Appointment Booking",
@@ -88,7 +87,8 @@ class _AppointmentBookingState extends State<AppointmentBooking> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const Booking2()));
+                          builder: (context) =>
+                              const AppointmentDateSelection()));
                 }
               },
               child: Container(

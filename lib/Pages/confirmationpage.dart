@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'my_homepage.dart';
 
 class ConfirmationPage extends StatelessWidget {
@@ -8,7 +7,6 @@ class ConfirmationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: Colors.white,
       body: Center(
           child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -45,7 +43,6 @@ class ConfirmationPage extends StatelessWidget {
           SizedBox(
             height: 150,
             width: 150,
-            // color: Colors.white,
             child: Image.asset('assets/giphy.gif'),
           )
         ],
