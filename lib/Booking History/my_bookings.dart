@@ -50,7 +50,7 @@ class _MyBookingsState extends State<MyBookings> {
               .snapshots(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return const CircularProgressIndicator();
+              return const Center(child: CircularProgressIndicator());
             }
             return ListView.builder(
                 itemCount: snapshot.data!.docs.length,
