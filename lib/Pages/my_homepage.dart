@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -18,10 +19,15 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  // late String userName;
-  // late String email;
-  // late String profilePic;
   late FirebaseFirestore firebaseFirestore;
+  int currentIndex = 0;
+  final CarouselController carouselController = CarouselController();
+
+  List images = [
+    {"id": 0, "imagePath": 'assets/DSLR.jpg'},
+    {"id": 1, "imagePath": 'assets/SiddhiVinayak.jpeg'},
+    {"id": 2, "imagePath": 'assets/Sdv.jpg'},
+  ];
 
   @override
   void initState() {
@@ -29,22 +35,18 @@ class _MyHomePageState extends State<MyHomePage> {
     firebaseFirestore = FirebaseFirestore.instance;
   }
 
-  // Future<UserModel?> getImages() async {
-  //   var uid = 'user1';
-  //   var userData =
-  //       await FirebaseFirestore.instance.collection('users').doc(uid).get();
-  //   UserModel? user;
-
-  //   if (userData.data() != null) {
-  //     user = UserModel.fromMap(userData.data()!);
-  //   }
-
-  //   userName = user!.name;
-  //   email = user.emailAddress;
-  //   profilePic = user.profilepic;
-
-  //   return user;
-  // }
+  Widget buildIndicator(bool isSelected) {
+    return Padding(
+      padding: const EdgeInsets.all(3),
+      child: Container(
+        height: isSelected ? 12 : 8,
+        width: isSelected ? 12 : 8,
+        decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: isSelected ? Colors.red : Colors.white),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -86,12 +88,11 @@ class _MyHomePageState extends State<MyHomePage> {
                     var user = UserModel.fromMap(userData);
                     return Column(children: [
                       UserAccountsDrawerHeader(
-                        accountName: Text(user.name),
-                        accountEmail: Text(user.emailAddress),
-                        currentAccountPicture: CircleAvatar(
-                          backgroundImage: NetworkImage(user.profilepic),
-                        )
-                      ),
+                          accountName: Text(user.name),
+                          accountEmail: Text(user.emailAddress),
+                          currentAccountPicture: CircleAvatar(
+                            backgroundImage: NetworkImage(user.profilepic),
+                          )),
                       ListTile(
                         title: Text('Hello  ${user.name}'),
                       )
@@ -101,17 +102,44 @@ class _MyHomePageState extends State<MyHomePage> {
               })),
       body: ListView(
         children: <Widget>[
-          const SizedBox(
-            height: 370,
-            width: 100,
-            child: Image(
-              image: AssetImage(
-                'assets/DSLR.jpg',
-              ),
-              fit: BoxFit.cover,
-            ),
-          ),
-          const SizedBox(height: 20),
+          SizedBox(
+              height: 370,
+              width: 100,
+              child: Stack(
+                children: [
+                  CarouselSlider(
+                      items: images
+                          .map((item) => Image.asset(
+                                item['imagePath'],
+                                fit: BoxFit.cover,
+                                width: double.infinity,
+                              ))
+                          .toList(),
+                      options: CarouselOptions(
+                        aspectRatio: 1,
+                        autoPlay: true,
+                        scrollPhysics: const BouncingScrollPhysics(),
+                        viewportFraction: 1,
+                        onPageChanged: (index, reason) {
+                          setState(() {
+                            currentIndex = index;
+                          });
+                        },
+                      )),
+                  Positioned(
+                      bottom: 27,
+                      left: 0,
+                      right: 0,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          for (var i = 0; i < images.length; i++)
+                            buildIndicator(currentIndex == i)
+                        ],
+                      ))
+                ],
+              )),
+          const SizedBox(height: 7),
           Container(
             height: 60,
             width: 70,
