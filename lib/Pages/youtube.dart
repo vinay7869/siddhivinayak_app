@@ -13,14 +13,13 @@ class Youtube extends StatefulWidget {
 class _YoutubeState extends State<Youtube> {
   late YoutubePlayerController _controller;
 
-  String videoId = 'https://www.youtube.com/watch?v=RYqJ5w-GrfM';
+  String videoId = 'https://www.youtube.com/watch?v=IO6iEMoUTt8';
 
   void runYouTubePlayer() {
     _controller = YoutubePlayerController(
-        initialVideoId:
-            YoutubePlayer.convertUrlToId(videoId) ?? '',
+        initialVideoId: YoutubePlayer.convertUrlToId(videoId) ?? '',
         flags: const YoutubePlayerFlags(
-          forceHD: true,
+            forceHD: true,
             loop: true,
             hideThumbnail: false,
             showLiveFullscreenButton: true,
@@ -39,6 +38,12 @@ class _YoutubeState extends State<Youtube> {
   void deactivate() {
     _controller.pause();
     super.deactivate();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 
   @override
