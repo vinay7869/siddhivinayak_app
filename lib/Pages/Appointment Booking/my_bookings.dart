@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:siddhivinayak_app/Booking%20History/date_model.dart';
+import 'package:siddhivinayak_app/Pages/Appointment%20Booking/date_model.dart';
 
 class MyBookings extends StatefulWidget {
   const MyBookings({super.key});
@@ -67,11 +67,13 @@ class _MyBookingsState extends State<MyBookings> {
                     children: [
                       Padding(
                           padding: const EdgeInsets.symmetric(
-                              horizontal: 20, vertical: 20),
+                              horizontal: 15, vertical: 20),
                           child: Container(
                               height: 80,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(22),
+                                  color: Theme.of(context).primaryColor),
                               width: double.infinity,
-                              color: Theme.of(context).primaryColor,
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceAround,

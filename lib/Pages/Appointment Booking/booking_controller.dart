@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:siddhivinayak_app/Booking%20History/booking_repository.dart';
+import 'package:siddhivinayak_app/Pages/Appointment%20Booking/booking_repository.dart';
 
 final bookingControllerProvider = Provider((ref) {
   final bookingRepository = ref.watch(bookingRepositoryProvider);

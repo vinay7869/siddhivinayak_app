@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:siddhivinayak_app/Booking%20History/date_model.dart';
-import 'package:siddhivinayak_app/Profile_storage/image_picker.dart';
+import 'package:siddhivinayak_app/Pages/Appointment%20Booking/date_model.dart';
+import '../Profile Page/image_picker.dart';
 
 final bookingRepositoryProvider = Provider(
     (ref) => BookingRepository(firebaseFirestore: FirebaseFirestore.instance));

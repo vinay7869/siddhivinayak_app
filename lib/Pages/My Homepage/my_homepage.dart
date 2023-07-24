@@ -1,15 +1,13 @@
-import 'package:carousel_slider/carousel_slider.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:siddhivinayak_app/Pages/settings.dart';
-import 'package:siddhivinayak_app/Pages/youtube.dart';
-import 'package:siddhivinayak_app/Profile_storage/user_model.dart';
-import '../Booking History/my_bookings.dart';
-import '../Profile_storage/profilepage.dart';
-import 'appointment_booking.dart';
-import 'notification_page.dart';
-
+import 'package:siddhivinayak_app/Pages/Appointment%20Booking/appointment_booking.dart';
+import 'package:siddhivinayak_app/Pages/Appointment%20Booking/my_bookings.dart';
+import 'package:siddhivinayak_app/Pages/My%20Homepage/carousel_slider.dart';
+import 'package:siddhivinayak_app/Pages/My%20Homepage/drawer_items.dart';
+import 'package:siddhivinayak_app/Pages/Notification/notification_page.dart';
+import 'package:siddhivinayak_app/Pages/settings_page.dart';
+import 'package:siddhivinayak_app/Pages/live_darshan.dart';
+import '../Profile Page/profilepage.dart';
 
 class MyHomePage extends StatefulWidget {
   static const routename = '/myHomepage';
@@ -20,35 +18,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  late FirebaseFirestore firebaseFirestore;
-  int currentIndex = 0;
-  final CarouselController carouselController = CarouselController();
-
-  List images = [
-    {"id": 0, "imagePath": 'assets/DSLR.jpg'},
-    {"id": 1, "imagePath": 'assets/SiddhiVinayak.jpeg'},
-    {"id": 2, "imagePath": 'assets/Sdv.jpg'},
-  ];
-
-  @override
-  void initState() {
-    super.initState();
-    firebaseFirestore = FirebaseFirestore.instance;
-  }
-
-  Widget buildIndicator(bool isSelected) {
-    return Padding(
-      padding: const EdgeInsets.all(3),
-      child: Container(
-        height: isSelected ? 12 : 8,
-        width: isSelected ? 12 : 8,
-        decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: isSelected ? Colors.red : Colors.white),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,73 +42,10 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
         iconTheme: const IconThemeData(color: Colors.red),
       ),
-      drawer: Drawer(
-          child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-              stream: firebaseFirestore.collection('users').snapshots(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }
-                return ListView.builder(
-                  itemCount: snapshot.data!.docs.length,
-                  itemBuilder: (context, index) {
-                    var userData = snapshot.data!.docs[index].data();
-                    var user = UserModel.fromMap(userData);
-                    return Column(children: [
-                      UserAccountsDrawerHeader(
-                          accountName: Text(user.name),
-                          accountEmail: Text(user.emailAddress),
-                          currentAccountPicture: CircleAvatar(
-                            backgroundImage: NetworkImage(user.profilepic),
-                          )),
-                      ListTile(
-                        title: Text('Hello  ${user.name}'),
-                      )
-                    ]);
-                  },
-                );
-              })),
+      drawer: const DrawerItems(),
       body: ListView(
         children: <Widget>[
-          SizedBox(
-              height: 370,
-              width: 100,
-              child: Stack(
-                children: [
-                  CarouselSlider(
-                      items: images
-                          .map((item) => Image.asset(
-                                item['imagePath'],
-                                fit: BoxFit.cover,
-                                width: double.infinity,
-                              ))
-                          .toList(),
-                      options: CarouselOptions(
-                        aspectRatio: 1,
-                        autoPlay: true,
-                        scrollPhysics: const BouncingScrollPhysics(),
-                        viewportFraction: 1,
-                        onPageChanged: (index, reason) {
-                          setState(() {
-                            currentIndex = index;
-                          });
-                        },
-                      )),
-                  Positioned(
-                      bottom: 27,
-                      left: 0,
-                      right: 0,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          for (var i = 0; i < images.length; i++)
-                            buildIndicator(currentIndex == i)
-                        ],
-                      ))
-                ],
-              )),
+          const CarouselSliderItems(),
           const SizedBox(height: 7),
           Container(
             height: 60,

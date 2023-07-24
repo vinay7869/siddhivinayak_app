@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:siddhivinayak_app/Profile_storage/profile_repository.dart';
+import 'package:siddhivinayak_app/Pages/Profile%20Page/profile_repository.dart';
 
 final profileControllerProvider = Provider(
   (ref) {

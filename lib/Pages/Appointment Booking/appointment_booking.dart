@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:siddhivinayak_app/Booking%20History/appointment_date_selection.dart';
-import 'my_homepage.dart';
+import 'package:siddhivinayak_app/Pages/Appointment%20Booking/appointment_date_selection.dart';
+import '../My Homepage/my_homepage.dart';
 
 class AppointmentBooking extends StatefulWidget {
   const AppointmentBooking({Key? key}) : super(key: key);

@@ -2,10 +2,10 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:siddhivinayak_app/Profile_storage/image_picker.dart';
-import 'package:siddhivinayak_app/Profile_storage/profile_controller.dart';
-import 'package:siddhivinayak_app/Profile_storage/user_model.dart';
-import '../Pages/my_homepage.dart';
+import 'package:siddhivinayak_app/Pages/Profile%20Page/image_picker.dart';
+import 'package:siddhivinayak_app/Pages/Profile%20Page/user_model.dart';
+import '../My Homepage/my_homepage.dart';
+import 'profile_controller.dart';
 
 class MyProfile extends ConsumerStatefulWidget {
   static const String routename = 'myprofile';
@@ -50,11 +50,8 @@ class _MyProfileState extends ConsumerState<MyProfile> {
   }
 
   void getProfileData() async {
-//data fetch
     var userData = await FirebaseFirestore.instance.collection('users').get();
-
     UserModel user;
-
     user = UserModel.fromMap(userData.docs[0].data());
 
     nameController.text = user.name;

@@ -3,9 +3,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:siddhivinayak_app/Profile_storage/image_picker.dart';
-import 'package:siddhivinayak_app/Profile_storage/image_provider.dart';
-import 'package:siddhivinayak_app/Profile_storage/user_model.dart';
+import 'package:siddhivinayak_app/Pages/Profile%20Page/image_picker.dart';
+import 'package:siddhivinayak_app/Pages/Profile%20Page/image_provider.dart';
+import 'package:siddhivinayak_app/Pages/Profile%20Page/user_model.dart';
+
+
+
 
 final profileRepositoryProvider = Provider(
   (ref) => ProfileRepository(
