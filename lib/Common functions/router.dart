@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:siddhivinayak_app/Pages/Notification/notification_page.dart';
 import 'package:siddhivinayak_app/Pages/Profile%20Page/profilepage.dart';
 import '../Pages/My Homepage/my_homepage.dart';
 

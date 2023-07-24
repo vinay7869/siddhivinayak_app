@@ -33,14 +33,13 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
           title: "SiddhiVinayak",
           debugShowCheckedModeBanner: false,
-          home: MyHomePage(),
-          // AnimatedSplashScreen(
-          //     splash: const Image(image: AssetImage('assets/AK.jpeg')),
-          //     backgroundColor: Colors.white,
-          //     splashIconSize: 200,
-          //     duration: 3000,
-          //     splashTransition: SplashTransition.fadeTransition,
-          //     nextScreen: const MyHomePage()),
+          home: AnimatedSplashScreen(
+              splash: const Image(image: AssetImage('assets/AK.jpeg')),
+              backgroundColor: Colors.white,
+              splashIconSize: 200,
+              duration: 3000,
+              splashTransition: SplashTransition.fadeTransition,
+              nextScreen: const MyHomePage()),
           themeMode: themeProvider.changeMode,
           theme: MyThemes.lightTheme,
           darkTheme: MyThemes.darkTheme,
