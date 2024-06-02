@@ -10,10 +10,12 @@ class Youtube extends StatefulWidget {
 
 class _YoutubeState extends State<Youtube> {
   late YoutubePlayerController _controller;
-  String videoId = 'https://www.youtube.com/watch?v=IO6iEMoUTt8';
+  late String preUrl = "https://www.youtube.com/watch?v=";
+  late String videoId = '${preUrl}JHTweaSqW7g';
 
   void runYouTubePlayer() {
     _controller = YoutubePlayerController(
+      
       initialVideoId: YoutubePlayer.convertUrlToId(videoId) ?? '',
       flags: const YoutubePlayerFlags(
         forceHD: true,

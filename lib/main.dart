@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart' as prefix;
 import 'package:provider/provider.dart';
-import 'package:siddhivinayak_app/Common%20functions/mythemes.dart';
+import 'Common%20functions/mythemes.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:siddhivinayak_app/Pages/Notification/notification_page.dart';
-import 'package:siddhivinayak_app/Pages/Notification/notification_repository.dart';
-import 'package:siddhivinayak_app/Common%20functions/router.dart';
+import 'Pages/Notification/notification_page.dart';
+import 'Pages/Notification/notification_repository.dart';
+import 'Common%20functions/router.dart';
 import 'Pages/My Homepage/my_homepage.dart';
 import 'firebase_options.dart';
 
@@ -15,7 +15,9 @@ final globalNavKey = GlobalKey<NavigatorState>();
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
   await NotificationRepository().initNotification();
+  
   runApp(const prefix.ProviderScope(child: MyApp()));
 }
 

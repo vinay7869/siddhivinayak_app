@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:siddhivinayak_app/Pages/Appointment%20Booking/date_model.dart';
+import '../Appointment%20Booking/date_model.dart';
 
 class MyBookings extends StatefulWidget {
   const MyBookings({super.key});
@@ -63,6 +63,7 @@ class _MyBookingsState extends State<MyBookings> {
                   } else {
                     isPending = false;
                   }
+                  if (myHistory.dateTime.month < currentDate.month){}
                   return Column(
                     children: [
                       Padding(

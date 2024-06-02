@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:siddhivinayak_app/Pages/Appointment%20Booking/appointment_date_selection.dart';
+import '../Appointment%20Booking/appointment_date_selection.dart';
 import '../My Homepage/my_homepage.dart';
 
 class AppointmentBooking extends StatefulWidget {

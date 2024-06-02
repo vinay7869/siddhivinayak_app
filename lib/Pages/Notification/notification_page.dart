@@ -59,6 +59,10 @@ class _NotificationPageState extends State<NotificationPage> {
                           height: 150,
                           width: 150,
                           child: CachedNetworkImage(
+                              placeholder: (context, url) => const SizedBox(
+                                  height: 20,
+                                  width: 20,
+                                  child: CircularProgressIndicator()),
                               imageUrl:
                                   'https://pngimg.com/uploads/exclamation_mark/exclamation_mark_PNG48.png')),
                       const SizedBox(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:siddhivinayak_app/Pages/Appointment%20Booking/booking_controller.dart';
-import 'package:siddhivinayak_app/Pages/Appointment%20Booking/appointment_booking.dart';
+import '../Appointment%20Booking/booking_controller.dart';
+import '../Appointment%20Booking/appointment_booking.dart';
 import 'confirmationpage.dart';
 
 class AppointmentDateSelection extends ConsumerStatefulWidget {

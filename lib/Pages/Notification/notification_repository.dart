@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:siddhivinayak_app/Pages/Notification/notification_page.dart';
-import 'package:siddhivinayak_app/main.dart';
+import 'notification_page.dart';
+import '../../main.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 Future<void> handleBackgroundMessage(RemoteMessage message) async {}

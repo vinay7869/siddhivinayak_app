@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:siddhivinayak_app/Common%20functions/mythemes.dart';
+import '../Common%20functions/mythemes.dart';
 import 'package:provider/provider.dart';
 
 class MySettings extends StatefulWidget {
@@ -30,23 +30,17 @@ class _SettingsState extends State<MySettings> {
             },
           ),
         ),
-        body: ListView(
-          children: [
-            const ListTile(
-              title: Text('Language'),
-            ),
-            const Divider(),
-            ListTile(
-                title: const Text('Theme'),
-                trailing: Switch.adaptive(
-                    value: themeProvider.isDarkMode,
-                    onChanged: (value) {
-                      final provider =
-                          Provider.of<ThemeProvider>(context, listen: false);
-                      provider.changeTheme(value);
-                    })),
-            const Divider()
-          ],
+        body: Padding(
+          padding: const EdgeInsets.all(10),
+          child: ListTile(
+              title: const Text('Theme'),
+              trailing: Switch.adaptive(
+                  value: themeProvider.isDarkMode,
+                  onChanged: (value) {
+                    final provider =
+                        Provider.of<ThemeProvider>(context, listen: false);
+                    provider.changeTheme(value);
+                  })),
         ));
   }
 }

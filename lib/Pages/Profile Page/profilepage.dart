@@ -2,8 +2,8 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:siddhivinayak_app/Pages/Profile%20Page/image_picker.dart';
-import 'package:siddhivinayak_app/Pages/Profile%20Page/user_model.dart';
+import '../Profile%20Page/image_picker.dart';
+import '../Profile%20Page/user_model.dart';
 import '../My Homepage/my_homepage.dart';
 import 'profile_controller.dart';
 
@@ -48,6 +48,8 @@ class _MyProfileState extends ConsumerState<MyProfile> {
           .saveDataToFirebase(name, context, emailAddress, phonenumber, image);
     }
   }
+
+  String? userImage;
 
   void getProfileData() async {
     var userData = await FirebaseFirestore.instance.collection('users').get();

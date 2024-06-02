@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:siddhivinayak_app/Pages/Appointment%20Booking/appointment_booking.dart';
-import 'package:siddhivinayak_app/Pages/Appointment%20Booking/my_bookings.dart';
-import 'package:siddhivinayak_app/Pages/My%20Homepage/carousel_slider.dart';
-import 'package:siddhivinayak_app/Pages/My%20Homepage/drawer_items.dart';
-import 'package:siddhivinayak_app/Pages/Notification/notification_page.dart';
-import 'package:siddhivinayak_app/Pages/settings_page.dart';
-import 'package:siddhivinayak_app/Pages/live_darshan.dart';
+import '../Appointment%20Booking/appointment_booking.dart';
+import '../Appointment%20Booking/my_bookings.dart';
+import '../My%20Homepage/carousel_slider.dart';
+import '../My%20Homepage/drawer_items.dart';
+import '../Notification/notification_page.dart';
+import '../settings_page.dart';
+import '../live_darshan.dart';
 import '../Profile Page/profilepage.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -20,6 +20,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
     return Scaffold(
       appBar: AppBar(
         title: const Text("Home", style: TextStyle(color: Colors.redAccent)),
@@ -114,7 +115,12 @@ class _MyHomePageState extends State<MyHomePage> {
             padding: const EdgeInsets.only(left: 20, right: 20),
             child: ListTile(
               onTap: () {
-                Navigator.pushNamed(context, MyProfile.routename);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const MyProfile(),
+                    ));
+                // Navigator.pushNamed(context, MyProfile.routename);
               },
               title: const Text("Profile", style: TextStyle(color: Colors.red)),
               leading: const Icon(Icons.person),
