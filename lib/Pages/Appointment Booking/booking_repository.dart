@@ -24,6 +24,7 @@ class BookingRepository {
           .doc()
           .set(user.toMap());
     } catch (e) {
+      // ignore: use_build_context_synchronously
       showSnackbar(context: context, content: e.toString());
     }
   }

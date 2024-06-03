@@ -23,6 +23,7 @@ class _MyProfileState extends ConsumerState<MyProfile> {
   final emailController = TextEditingController();
 
   final phoneController = TextEditingController();
+  bool isDataLoaded = false;
 
   @override
   void initState() {
@@ -41,24 +42,32 @@ class _MyProfileState extends ConsumerState<MyProfile> {
   void saveDataToFirebase() {
     String name = nameController.text.trim();
     String emailAddress = emailController.text.trim();
-    String phonenumber = phoneController.text.toString().trim();
-    if (name.isNotEmpty && emailAddress.isNotEmpty && phonenumber.isNotEmpty) {
+    String phoneNumber = phoneController.text.toString().trim();
+    if (name.isNotEmpty &&
+        emailAddress.isNotEmpty &&
+        phoneNumber.isNotEmpty &&
+        image != null) {
       ref
           .read(profileControllerProvider)
-          .saveDataToFirebase(name, context, emailAddress, phonenumber, image);
+          .saveDataToFirebase(name, context, emailAddress, phoneNumber, image);
     }
   }
 
-  String? userImage;
+  UserModel? user;
 
   void getProfileData() async {
+    isDataLoaded = false;
     var userData = await FirebaseFirestore.instance.collection('users').get();
-    UserModel user;
+
     user = UserModel.fromMap(userData.docs[0].data());
 
-    nameController.text = user.name;
-    emailController.text = user.emailAddress;
-    phoneController.text = user.phonenumber;
+    nameController.text = user!.name;
+    emailController.text = user!.emailAddress;
+    phoneController.text = user!.phonenumber;
+
+    setState(() {
+      isDataLoaded = true;
+    });
   }
 
   @override
@@ -81,13 +90,13 @@ class _MyProfileState extends ConsumerState<MyProfile> {
           padding: const EdgeInsets.symmetric(vertical: 20),
           child: ListView(children: <Widget>[
             Stack(alignment: Alignment.center, children: <Widget>[
-              image == null
+              !isDataLoaded
                   ? const CircleAvatar(
                       backgroundImage: AssetImage('assets/pp.png'),
                       radius: 80,
                     )
                   : CircleAvatar(
-                      backgroundImage: FileImage(image!),
+                      backgroundImage: NetworkImage(user!.profilepic),
                       radius: 80,
                     ),
               Positioned(
@@ -96,7 +105,10 @@ class _MyProfileState extends ConsumerState<MyProfile> {
                   child: IconButton(
                     onPressed: () async {
                       image = await pickImageFromGallery(context);
-                      setState(() {});
+                      setState(() {
+                        saveDataToFirebase();
+                        getProfileData();
+                      });
                     },
                     icon: const Icon(Icons.add_a_photo),
                     color: Colors.red,

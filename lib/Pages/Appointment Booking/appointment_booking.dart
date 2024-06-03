@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:siddhivinayak_app/Pages/Profile%20Page/image_picker.dart';
 import '../Appointment%20Booking/appointment_date_selection.dart';
 import '../My Homepage/my_homepage.dart';
 
@@ -26,7 +27,9 @@ class _AppointmentBookingState extends State<AppointmentBooking> {
               style: TextStyle(color: Colors.red)),
         ),
         body: ListView(
-          padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+          // padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+          padding:
+              const EdgeInsets.only(left: 20, right: 20, bottom: 60, top: 12),
           children: <Widget>[
             const Text(
                 "Notice: Due to the rise in COVID-19 cases and as per updated government directives,only limited slots are available for Darshan appointments.",
@@ -66,9 +69,9 @@ class _AppointmentBookingState extends State<AppointmentBooking> {
                   checkColor: Colors.white,
                   activeColor: Colors.red,
                   value: _value,
-                  onChanged: (newvalue) {
+                  onChanged: (newValue) {
                     setState(() {
-                      _value = newvalue!;
+                      _value = newValue!;
                     });
                   }),
               title: const Text(
@@ -82,7 +85,9 @@ class _AppointmentBookingState extends State<AppointmentBooking> {
             GestureDetector(
               onTap: () {
                 if (_value == false) {
-                  const AppointmentBooking();
+                  showSnackbar(
+                      context: context,
+                      content: 'Please acknowledge the checkbox');
                 } else {
                   Navigator.push(
                       context,
