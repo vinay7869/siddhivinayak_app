@@ -5,7 +5,7 @@ import 'package:image_picker/image_picker.dart';
 Future<File?> pickImageFromGallery(BuildContext context) async {
   File? image;
   try {
-    final pickedImage = 
+    final pickedImage =
         await ImagePicker().pickImage(source: ImageSource.gallery);
     if (pickedImage != null) {
       image = File(pickedImage.path);
@@ -17,6 +17,6 @@ Future<File?> pickImageFromGallery(BuildContext context) async {
   return image;
 }
 
-void showSnackbar({required BuildContext context,required String content}) {
- ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('content'))); 
+void showSnackbar({required BuildContext context, required String content}) {
+  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(content)));
 }

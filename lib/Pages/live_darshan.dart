@@ -15,7 +15,6 @@ class _YoutubeState extends State<Youtube> {
 
   void runYouTubePlayer() {
     _controller = YoutubePlayerController(
-      
       initialVideoId: YoutubePlayer.convertUrlToId(videoId) ?? '',
       flags: const YoutubePlayerFlags(
         forceHD: true,

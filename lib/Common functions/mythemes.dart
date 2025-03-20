@@ -12,17 +12,17 @@ class ThemeProvider extends ChangeNotifier {
 
 class MyThemes {
   static var darkTheme = ThemeData(
-    scaffoldBackgroundColor: Colors.black,
-    colorScheme: const ColorScheme.dark(),
-    primaryColor: Colors.white10,
-    iconTheme: const IconThemeData(color: Colors.green),
-  );
+      scaffoldBackgroundColor: Colors.black,
+      colorScheme: const ColorScheme.dark(),
+      primaryColor: Colors.white10,
+      iconTheme: const IconThemeData(color: Colors.green),
+      snackBarTheme: const SnackBarThemeData(backgroundColor: Colors.blueGrey));
 
   static var lightTheme = ThemeData(
-    scaffoldBackgroundColor: Colors.white,
-    colorScheme: const ColorScheme.light(),
-    appBarTheme: const AppBarTheme(color: Colors.white),
-    iconTheme: const IconThemeData(color: Colors.green),
-    primaryColor: Colors.black26,
-  );
+      scaffoldBackgroundColor: Colors.white,
+      colorScheme: const ColorScheme.light(),
+      appBarTheme: const AppBarTheme(color: Colors.white),
+      iconTheme: const IconThemeData(color: Colors.green),
+      primaryColor: Colors.black26,
+      snackBarTheme: const SnackBarThemeData(backgroundColor: Colors.grey));
 }

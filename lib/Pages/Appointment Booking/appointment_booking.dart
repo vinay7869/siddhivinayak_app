@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:siddhivinayak_app/Pages/Profile%20Page/image_picker.dart';
 import '../Appointment%20Booking/appointment_date_selection.dart';
 import '../My Homepage/my_homepage.dart';
 
@@ -55,9 +56,9 @@ class _AppointmentBookingState extends State<AppointmentBooking> {
                   checkColor: Colors.white,
                   activeColor: Colors.red,
                   value: _value,
-                  onChanged: (newvalue) {
+                  onChanged: (newValue) {
                     setState(() {
-                      _value = newvalue!;
+                      _value = newValue!;
                     });
                   }),
               title: const Text(
@@ -71,7 +72,9 @@ class _AppointmentBookingState extends State<AppointmentBooking> {
             GestureDetector(
               onTap: () {
                 if (_value == false) {
-                  const AppointmentBooking();
+                  showSnackbar(
+                      context: context,
+                      content: 'Please acknowledge the checkbox');
                 } else {
                   Navigator.push(
                       context,
