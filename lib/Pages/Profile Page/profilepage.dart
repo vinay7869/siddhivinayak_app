@@ -57,16 +57,18 @@ class _MyProfileState extends ConsumerState<MyProfile> {
   String? userImage;
   String url = '';
 
+   UserModel? user;
+
   void getProfileData() async {
     isDataLoaded = false;
     var userData = await FirebaseFirestore.instance.collection('users').get();
 
     user = UserModel.fromMap(userData.docs[0].data());
 
-    nameController.text = user.name;
-    emailController.text = user.emailAddress;
-    phoneController.text = user.phonenumber;
-    url = user.profilepic;
+    nameController.text = user!.name;
+    emailController.text = user!.emailAddress;
+    phoneController.text = user!.phonenumber;
+    url = user!.profilepic;
 
     setState(() {});
   }
