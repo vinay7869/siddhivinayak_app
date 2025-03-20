@@ -63,7 +63,7 @@ class _MyBookingsState extends State<MyBookings> {
                   } else {
                     isPending = false;
                   }
-                  if (myHistory.dateTime.month < currentDate.month){}
+                  if (myHistory.dateTime.month < currentDate.month) {}
                   return Column(
                     children: [
                       Padding(
@@ -105,7 +105,11 @@ class _MyBookingsState extends State<MyBookings> {
                                               backgroundColor:
                                                   const MaterialStatePropertyAll(
                                                       Colors.green)),
-                                          child: const Text('Completed'))
+                                          child: const Text(
+                                            'Completed',
+                                            style:
+                                                TextStyle(color: Colors.amber),
+                                          ))
                                 ],
                               ))),
                     ],

@@ -13,9 +13,9 @@ class _CarouselSliderItemsState extends State<CarouselSliderItems> {
   final CarouselController carouselController = CarouselController();
 
   List images = [
-    {"id": 0, "imagePath": 'assets/DSLR.jpg'},
-    {"id": 1, "imagePath": 'assets/SiddhiVinayak.jpeg'},
-    {"id": 2, "imagePath": 'assets/Sdv.jpg'},
+    {"id": 0, "imagePath": 'assets/sd1.png'},
+    {"id": 1, "imagePath": 'assets/sd2.png'},
+    {"id": 2, "imagePath": 'assets/sd3.png'},
   ];
 
   Widget buildIndicator(bool isSelected) {

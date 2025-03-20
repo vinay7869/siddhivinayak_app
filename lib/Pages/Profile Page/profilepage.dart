@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -50,6 +51,7 @@ class _MyProfileState extends ConsumerState<MyProfile> {
   }
 
   String? userImage;
+  String url = '';
 
   void getProfileData() async {
     var userData = await FirebaseFirestore.instance.collection('users').get();
@@ -59,6 +61,9 @@ class _MyProfileState extends ConsumerState<MyProfile> {
     nameController.text = user.name;
     emailController.text = user.emailAddress;
     phoneController.text = user.phonenumber;
+    url = user.profilepic;
+
+    setState(() {});
   }
 
   @override
@@ -82,8 +87,13 @@ class _MyProfileState extends ConsumerState<MyProfile> {
           child: ListView(children: <Widget>[
             Stack(alignment: Alignment.center, children: <Widget>[
               image == null
-                  ? const CircleAvatar(
-                      backgroundImage: AssetImage('assets/pp.png'),
+                  ? CircleAvatar(
+                      backgroundImage: CachedNetworkImageProvider(
+                        url,
+                        errorListener: (p0) =>
+                            const AssetImage('assets/pp.png'),
+                      ),
+                      backgroundColor: Colors.transparent,
                       radius: 80,
                     )
                   : CircleAvatar(

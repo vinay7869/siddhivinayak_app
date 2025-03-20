@@ -7,9 +7,6 @@ import '../Profile%20Page/image_picker.dart';
 import '../Profile%20Page/image_provider.dart';
 import '../Profile%20Page/user_model.dart';
 
-
-
-
 final profileRepositoryProvider = Provider(
   (ref) => ProfileRepository(
       firebaseFirestore: FirebaseFirestore.instance,
@@ -47,6 +44,7 @@ class ProfileRepository {
 
       await firebaseFirestore.collection('users').doc(uid).set(user.toMap());
     } catch (e) {
+      // ignore: use_build_context_synchronously
       showSnackbar(context: context, content: e.toString());
     }
   }
