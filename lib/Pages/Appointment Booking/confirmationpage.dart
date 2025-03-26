@@ -40,11 +40,6 @@ class ConfirmationPage extends StatelessWidget {
                 style: TextStyle(color: Colors.white, fontSize: 17),
               )),
           const SizedBox(height: 30),
-          SizedBox(
-            height: 150,
-            width: 150,
-            child: Image.asset('assets/giphy.gif'),
-          )
         ],
       )),
     );

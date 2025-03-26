@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 import '../Appointment%20Booking/date_model.dart';
 
 class MyBookings extends StatefulWidget {
@@ -23,6 +24,49 @@ class _MyBookingsState extends State<MyBookings> {
             'Appointment already completed',
             textAlign: TextAlign.center,
           )),
+    );
+  }
+
+  void _showQrCodeDialog(BuildContext context, String dateTime) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return Dialog(
+          backgroundColor: Colors.white,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          child: Container(
+            padding: const EdgeInsets.all(16),
+            constraints: const BoxConstraints(maxHeight: 350),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Text(
+                  'QR Code',
+                  style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black),
+                ),
+                const SizedBox(height: 16),
+                QrImageView(
+                  data: dateTime,
+                  size: 180,
+                ),
+                const SizedBox(height: 16),
+                TextButton(
+                  onPressed: () => Navigator.pop(context),
+                  child: const Text(
+                    'Close',
+                    style: TextStyle(fontSize: 16),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 
@@ -63,7 +107,7 @@ class _MyBookingsState extends State<MyBookings> {
                   } else {
                     isPending = false;
                   }
-                  if (myHistory.dateTime.month < currentDate.month) {}
+
                   return Column(
                     children: [
                       Padding(
@@ -83,32 +127,42 @@ class _MyBookingsState extends State<MyBookings> {
                                       .format(myHistory.dateTime)),
                                   isPending
                                       ? ElevatedButton(
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            _showQrCodeDialog(
+                                              context,
+                                              myHistory.dateTime
+                                                  .toIso8601String(),
+                                            );
+                                          },
                                           style: ButtonStyle(
-                                              shape: MaterialStatePropertyAll(
+                                              shape: WidgetStatePropertyAll(
                                                   RoundedRectangleBorder(
                                                       borderRadius:
                                                           BorderRadius.circular(
                                                               20))),
                                               backgroundColor:
-                                                  const MaterialStatePropertyAll(
+                                                  const WidgetStatePropertyAll(
                                                       Colors.orange)),
-                                          child: const Text('Tap to Scan'))
+                                          child: const Text(
+                                            'Tap to Scan',
+                                            style:
+                                                TextStyle(color: Colors.white),
+                                          ))
                                       : ElevatedButton(
                                           onPressed: openDialougeBox,
                                           style: ButtonStyle(
-                                              shape: MaterialStatePropertyAll(
+                                              shape: WidgetStatePropertyAll(
                                                   RoundedRectangleBorder(
                                                       borderRadius:
                                                           BorderRadius.circular(
                                                               20))),
                                               backgroundColor:
-                                                  const MaterialStatePropertyAll(
+                                                  const WidgetStatePropertyAll(
                                                       Colors.green)),
                                           child: const Text(
                                             'Completed',
                                             style:
-                                                TextStyle(color: Colors.amber),
+                                                TextStyle(color: Colors.white),
                                           ))
                                 ],
                               ))),

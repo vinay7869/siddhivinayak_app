@@ -16,7 +16,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
-  // await NotificationRepository().initNotification();
+  await NotificationRepository().initNotification();
   
   runApp(const prefix.ProviderScope(child: MyApp()));
 }
@@ -47,7 +47,7 @@ class MyApp extends StatelessWidget {
           darkTheme: MyThemes.darkTheme,
           navigatorKey: globalNavKey,
           routes: {
-            // NotificationPage.routeName: (context) => const NotificationPage()
+            NotificationPage.routeName: (context) => const NotificationPage()
           },
           onGenerateRoute: (settings) => routers(settings),
         );
